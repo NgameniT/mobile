@@ -42,12 +42,18 @@ class _LoginScreenState extends State<LoginScreen> {
   void _saveRedirectionToken(User user) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('token', user.token ?? '');
-    await prefs.setInt('userid', user.id ?? 0);
+    await prefs.setInt('userId', user.id ?? 0);
+    if (user.role != null && user.role!.isNotEmpty) {
+      await prefs.setString('userRole', user.role!);
+    } else {
+      await prefs.remove('userRole'); // Supprimer la clé si le rôle est vide
+    }
     Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(builder: (context) => MyHomePage(title: 'title')),
+      MaterialPageRoute(builder: (context) => WelcomeScreen()),
           (route) => false,
     );
   }
+
 
   void _navigateToRegistration() {
     Navigator.push(

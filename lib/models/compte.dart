@@ -12,7 +12,7 @@ class Compte {
   factory Compte.fromJson(Map<String, dynamic> json) {
     return Compte(
       numeroDeCompte: json['numero_de_compte'],
-      solde: json['solde']?.toDouble(),
+      solde: json['solde'] != null ? double.tryParse(json['solde']) : null, // Utilisation de double.tryParse
       userId: json['user_id'],
     );
   }

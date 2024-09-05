@@ -1,16 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:untitled/main.dart';
-import 'package:untitled/screens/registration.dart';
-import 'Login.dart';
+import 'package:untitled/main.dart'; // Assurez-vous que MyHomePage est défini ici
+import 'package:untitled/screens/kioskScreen.dart'; // Assurez-vous que KioskScreen est défini ici
+import 'package:untitled/services/user_service.dart'; // Assurez-vous que getUserRole est défini ici
+import 'package:shared_preferences/shared_preferences.dart';
 
 class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Déclencher la navigation après un délai
-    Future.delayed(Duration(seconds: 3), () {
+    Future.delayed(Duration(seconds: 3), () async {
+      String userRole = await getUserRole();
+      Widget nextPage;
+
+      if (userRole == 'kiosque') {
+        print("Redirection vers KioskScreen");
+        nextPage = KioskScreen(); // Assurez-vous que ce fichier existe
+      } else {
+        print("Redirection vers MyHomePage");
+        nextPage = MyHomePage(title: 'SWIFTPAY');
+      }
+
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => MyHomePage(title: 'SweetPay')),
+        MaterialPageRoute(builder: (context) => nextPage),
       );
     });
 
@@ -24,13 +36,12 @@ class WelcomeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Ajout d'une icône ou d'une image de présentation
             Icon(
               Icons.attach_money,
               size: 100,
               color: Colors.deepPurple,
             ),
-            SizedBox(height: 32), // Espacement entre l'icône et le texte
+            SizedBox(height: 32),
             Text(
               'Bienvenue sur SWIFTPAY',
               style: TextStyle(

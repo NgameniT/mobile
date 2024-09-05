@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:untitled/models/api_response.dart';
-import 'package:untitled/services/user_service.dart'; // Assurez-vous que getuserDetail() est défini ici
-import 'package:untitled/models/user.dart'; // Assurez-vous que User est défini ici
+import 'package:untitled/models/user.dart';
+import 'package:untitled/services/user_service.dart'; // Importez votre fichier de service
 
 class ProfilScreen extends StatefulWidget {
   const ProfilScreen({Key? key}) : super(key: key);
@@ -12,11 +12,11 @@ class ProfilScreen extends StatefulWidget {
 
 class _ProfilScreenState extends State<ProfilScreen> {
   late Future<ApiResponse> _futureUserDetails;
-  bool loading = true; // État de chargement
+  bool loading = true; // Ajouté pour gérer l'état de chargement
   User? user; // Stocker l'utilisateur récupéré
 
   // Méthode pour charger les détails de l'utilisateur
-  Future<void> _loadUserDetails() async {
+  void _loadUserDetails() async {
     try {
       ApiResponse response = await getuserDetail();
       if (response.error == null) {
@@ -49,7 +49,7 @@ class _ProfilScreenState extends State<ProfilScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Profil kiosque',
+          'Profil de Client',
           style: TextStyle(
             color: Colors.deepPurple,
             fontWeight: FontWeight.bold,

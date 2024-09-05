@@ -2,9 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:untitled/screens/HistoryScreen.dart';
 import 'package:untitled/screens/Login.dart';
-import 'package:untitled/screens/ProfilScreen.dart';
 import 'package:untitled/screens/ReceiveScreen.dart';
 import 'package:untitled/screens/SendScreen.dart';
+import 'package:untitled/screens/clientprofil.dart';
 import 'package:untitled/screens/loading.dart';
 import 'package:untitled/services/auth_service.dart'; // Importez le service d'authentification
 
